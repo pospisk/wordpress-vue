@@ -1,5 +1,5 @@
 # wordpress-vue
-In the past I have enjoyed developing themes for WordPress using (_S)[https://underscores.me/] but it lacked the features of a PWA. I wanted to create a more fluid user experience and that's when I found (WordPress Vue Theme Starter)[https://github.com/EvanAgee/vuejs-wordpress-theme-starter/]. The theme is built using Vue.js and the WordPress REST API. Using the PWA approach of Vue.js I have created animations using GSAP for the page transition effects and intro loading effects.
+In the past I have enjoyed developing themes for WordPress using [_S](https://underscores.me/) but it lacked the features of a PWA. I wanted to create a more fluid user experience and that's when I found [WordPress Vue Theme Starter](https://github.com/EvanAgee/vuejs-wordpress-theme-starter/). The theme is built using Vue.js and the WordPress REST API. Using the PWA approach of Vue.js I have created animations using GSAP for the page transition effects and intro loading effects.
 
 ## Install
 1. **Clone the repo** inside of your `wp-content/themes/` directory
