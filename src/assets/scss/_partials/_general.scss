@@ -1,0 +1,95 @@
+.progress{
+    background-color: unset;
+}
+
+.loader{
+
+    .progress-bar{
+        background-color: #5D6845;
+    }
+}
+
+body{
+    background-color: #f2f2f2;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.content{
+    &-wrapper{
+        margin: 100px 64px 0 64px;
+        // page nav space
+        margin-top: 100px;
+        @media (max-width: 768px){
+            margin: 0 32px;
+            margin: 100px 32px 0 32px;
+        }
+        @media (max-width: 576px){
+            margin: 100px 16px 0 16px;
+        }
+    }
+    &-inner{
+        padding: 0;
+    }
+}
+
+.intro{
+    transition: opacity 1500ms ease-in-out;
+    opacity: 1;
+    &-hide{
+        opacity: 0;
+        transition: opacity 1500ms ease-in-out;
+    }
+}
+
+.personal{
+    h1{
+        font-size: 3em;
+        margin-bottom: 0;
+    }
+    h2{
+        font-size: 1.8em;
+    }
+}
+
+.pospisk{
+    &-logo{
+
+    }
+    &-illustration{
+        
+        & div:first-child{
+            max-width: 400px;
+            min-width: 250px;
+            margin: 0 auto;
+
+            svg{
+                margin-top: 0;
+            
+                @media (max-width: 768px){
+                    margin-top: -75px;
+                    margin-bottom: -50px;
+                }
+            }
+        }
+
+        &-bg{
+            background-image: url('http://pospisk.local/wp-content/themes/pospisk/dist/fonts/blob.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 900px;
+            height: 900px;
+            display: block;
+            z-index: -99;
+            position: absolute;
+            top: -40%;
+            left: -50%;
+
+            @media (max-width: 768px){
+                top: -85%;
+                left: -20%;
+            }
+        }
+    }
+}
