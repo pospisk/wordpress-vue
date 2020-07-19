@@ -1,6 +1,6 @@
+import 'babel-polyfill';
 import Vue from 'vue';
 require('./bootstrap');
-
 import router from './router';
 import App from './App.vue';
 import store from './store';

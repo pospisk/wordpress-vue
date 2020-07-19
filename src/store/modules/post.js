@@ -1,11 +1,61 @@
+import Vue from 'vue';
+
 import api from '../../api';
 import * as types from '../mutation-types';
+
+import axios from "axios";
+import SETTINGS from "../../settings";
+import "regenerator-runtime";
+import async from 'regenerator-runtime';
+
 
 const createPostSlug = post => {
   let slug = post.link.replace(window.location.protocol + '//' + window.location.host, '');
   post.slug = slug;
-  return post;
+  
+  return post; 
+  
 };
+const createMedia = post => {
+
+  post.featured_media_url = '';
+  
+  const axiosResult = async () => {
+    let url = SETTINGS.API_BASE_PATH + "media/" + post.featured_media;
+    post.featured_media_url = await axios.get( url            
+        ).then(response => {
+          return response.data.source_url;
+        }).catch(e => {
+          console.log(e);
+        });
+  }
+  axiosResult()
+  return post; 
+};
+const createAuthor = post => {
+    
+  const axiosResult = async () => {
+    let url = SETTINGS.API_BASE_PATH + "users/" + post.author;
+    await axios.get( url            
+      ).then(response => {
+
+        if(response.data.simple_local_avatar){
+          post.author_avatar = response.data.simple_local_avatar['96'];  // uses https://10up.com/plugins/simple-local-avatars-wordpress/
+        }else{
+          console.error("user avatar not found");
+        }
+        
+        post.author_name = response.data.name;
+        post.author_url = response.data.link;
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+  axiosResult()
+  console.log(post);
+  return post; 
+};
+
 
 // initial state
 const state = {
@@ -20,7 +70,7 @@ const getters = {
       !limit ||
       !Number.isInteger(limit) ||
       typeof limit == 'undefined'
-    ) {
+    ) {  
       return state.recent;
     }
     let recent = state.recent;
@@ -36,6 +86,9 @@ const actions = {
     api.getPosts(limit, posts => {
       posts.map((post, i) => {
         posts[i] = createPostSlug(post);
+        posts[i] = createMedia(post);
+        posts[i] = createAuthor(post);
+
       });
 
       commit(types.STORE_FETCHED_POSTS, { posts });
@@ -43,13 +96,61 @@ const actions = {
       commit(types.INCREMENT_LOADING_PROGRESS);
     });
   },
+  
 };
 
 // mutations
 const mutations = {
   [types.STORE_FETCHED_POSTS](state, { posts }) {
+    
+    // let editedPosts = [];
+
+    // posts.forEach(async post =>{
+
+        // let url = SETTINGS.API_BASE_PATH + "media/" + post.featured_media;
+        // let result = await axios.get(
+        //   url            
+        //   ).then(response => {
+        //     return response.data.source_url;
+        //   }).catch(e => {
+        //     console.log(e);
+        //   });
+          
+          // post.featured_media_url = result;
+          // Vue.set(post, 'featured_media_url', result);
+          
+          // post.featured_media = Object.assign({}, post.featured_media, {
+          //   id: post.featured_media,
+          //   url: result
+          // })
+          
+          // editedPosts.push(post);
+          
+          // console.log("post");
+          // console.log(post);
+
+        // Object.defineProperty(post, 'featured_media_url', {
+        //   value: result,
+        //   writable: true
+        // });
+
+        // Vue.set(editedPosts,i , post);
+
+        // this.$set(this.post.featured_media, 'url', result);
+        
+        // $set(post.featured_media, 'url', result);
+          // state.recent = editedPosts;
+    // });
+
+    // console.log('edited posts');
+    // console.log(editedPosts);
+
+    // state.recent = editedPosts;
+    // console.log(posts);
     state.recent = posts;
+
   },
+  
 
   [types.POSTS_LOADED](state, val) {
     state.loaded = val;

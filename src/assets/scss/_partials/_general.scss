@@ -45,6 +45,7 @@ body{
 .personal{
     h1{
         font-size: 3em;
+        font-weight: 700;
         margin-bottom: 0;
     }
     h2{
@@ -53,9 +54,6 @@ body{
 }
 
 .pospisk{
-    &-logo{
-
-    }
     &-illustration{
         
         & div:first-child{
@@ -92,4 +90,8 @@ body{
             }
         }
     }
+}
+
+footer{
+    margin-bottom: 1em;
 }

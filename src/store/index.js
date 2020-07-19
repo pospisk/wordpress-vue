@@ -14,7 +14,7 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 let localStorage = createPersist({
-    namespace: 'YOUR_APP_NAMESPACE',
+    namespace: 'pospisk',
     initialState: {},
     expires: 1.21e+9 // Two Weeks
 })
@@ -29,6 +29,6 @@ export default new Vuex.Store({
     page,
     categories
   },
-  strict: debug,
+  strict: false, // was debug
   plugins: [localStorage]
 })

@@ -31,12 +31,7 @@
                         username: m[4] || "",                // username
                         password: m[5] || ""                 // password
                     };
-                // if (r.protocol.length == 2) {
-                //     r.protocol = "file:///" + r.protocol.toUpperCase();
-                //     r.origin = r.protocol + "//" + r.host;
-                // }
-                // r.href = r.origin + r.pathname + r.search + r.hash;
-                console.log(r);
+
                 return r.pathname;
             }
         }

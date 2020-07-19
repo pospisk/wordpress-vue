@@ -1,6 +1,10 @@
 <template>
   <div class="bv-example-row pt-4">
     <template v-if="post">
+      <img 
+        class="img-fluid"
+        :src="postImage" 
+        :alt="postImageAlt">
       <h1>{{ post.title.rendered }}</h1>
       <div v-html="post.content.rendered"></div>
     </template>
@@ -17,7 +21,9 @@ import SETTINGS from "../../settings";
 export default {
   data() {
     return {
-      post: false
+      post: false,
+      postImage: [],
+      postImageAlt: []
     };
   },
 
@@ -35,11 +41,34 @@ export default {
         )
         .then(response => {
           this.post = response.data[0];
+          this.getFeaturedImage(this.post);
         })
         .catch(e => {
           console.log(e);
         });
+    },
+    getFeaturedImage: function(post) {
+
+      if(post.featured_media > 0){
+        axios
+          .get(
+            SETTINGS.API_BASE_PATH + "media/" + post.featured_media
+          )
+          .then(response => {
+            this.postImage = response.data.guid.rendered;
+            this.postImageAlt = response.data.alt_text;
+            console.log(response);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }else{
+        console.log('No Featured Image Found');
+      }
+
     }
+
+
   },
 
   components: {

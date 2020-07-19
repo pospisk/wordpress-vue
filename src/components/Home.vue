@@ -4,7 +4,7 @@
     <div class="row d-flex flex-row-reverse flex-md-row">
       <div class="col-12 col-md-6">
         <div class="pospisk-illustration" id="pospisk-illustration">
-           <lottie :options="illustrationOptions" :height="auto" width="100%" v-on:animCreated="illustrationAnimation"/>
+           <lottie :options="illustrationOptions" :height="auto" v-on:animCreated="illustrationAnimation"/>
           <div class="pospisk-illustration-bg"></div>
         </div>
       </div>
@@ -21,16 +21,37 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <h3>Design</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dignissimos, fuga cupiditate vero molestias totam quaerat! Nihil deleniti dolor veniam. Delectus numquam doloribus aspernatur atque? Minima nisi dolore officiis dolorum.
-        </p>
+        <h3>Latest Work</h3>
+
+        <recent-posts-widget limit="5" class="mb-10">Recent Posts</recent-posts-widget>
+      
+        <!-- <div class="work__wrapper">
+          
+          <div class="work__item">
+            <div class="work__header">
+              <div class="work__header--image">
+                <img src="https://pospisk.github.io/img/digital_reklame_snow.d029d6dd.jpg" alt="Work1" class="img-fluid">
+              </div>
+            </div>
+            <div class="work__body">
+              <div class="work__body--title">
+                <h4>Digital Reklame Logo</h4>
+              </div>
+              <div class="work__body--description">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis earum reprehenderit, minima nihil cum vel cumque nisi nulla ad...
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div> -->
       </div>
     </div>
   </div>
 
-    <!-- <recent-posts-widget limit="5" class="mb-10">Recent Posts</recent-posts-widget>
-    <pages-widget limit="5">Pages</pages-widget> -->
+    
+    <!-- <pages-widget limit="5">Pages</pages-widget> -->
   </div>
 </template>
 
@@ -129,7 +150,11 @@ export default {
 
       });
 
-      }
+
+      window.addEventListener("click", e => { 
+        blinkSegment(); 
+      });
+    }
 
     //  function createCanvasOverlay(){
     //     // Create a blank div where we are going to put the canvas into.

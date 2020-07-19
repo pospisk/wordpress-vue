@@ -1,5 +1,5 @@
 <template>
-  <div class="row fixed-top">
+  <div class="row navbar-row">
     <b-navbar toggleable="md" type="light" class="col-12" id="navbar">
       <b-navbar-brand href="#" class="pospisk-logo">
         <lottie :options="logoOptions" :height="auto" :width="200" v-on:animCreated="logoAnimation"/>
