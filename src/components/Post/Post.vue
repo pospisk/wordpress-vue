@@ -1,6 +1,9 @@
 <template>
-  <div class="bv-example-row pt-4">
+  <div class="row">
     <template v-if="post">
+      <button v-on:click="goBack">
+        go back
+      </button>
       <img 
         class="img-fluid"
         :src="postImage" 
@@ -34,6 +37,9 @@ export default {
   },
 
   methods: {
+    goBack: function(){
+      this.$router.go(-1)
+    },
     getPost: function() {
       axios
         .get(

@@ -9,13 +9,23 @@
       </div>
     </div>
 
-    <transition name="page-transition" mode="out-in" appear>
-      <div id="content" class="row content-wrapper intro intro-hide">
+    <span>{{this.prevHeight}}</span>
+
+      <div id="content" class="row content-wrapper intro">
         <div class="col-12 content-inner">
-          <router-view></router-view>
+          <transition 
+            name="slide-fade" 
+            mode="out-in" 
+            enter-active-class="animate__animated animate__backInUp"
+            leave-active-class="animate__animated animate__backOutDown"
+          >
+            <!-- @beforeLeave="beforeLeave"
+            @enter="enter"
+            @afterEnter="afterEnter" -->
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
-    </transition>
 
     <app-footer />
   </div>
@@ -31,7 +41,25 @@ export default {
   data() {
     return {
       showLoader: true,
+      prevHeight: 0,
     };
+  },
+  methods: {
+    // beforeLeave(element) {
+    //   this.prevHeight = getComputedStyle(element).height;
+    // },
+    // enter(element) {
+    //   const { height } = getComputedStyle(element);
+
+    //   element.style.height = this.prevHeight;
+
+    //   setTimeout(() => {
+    //     element.style.height = height;
+    //   });
+    // },
+    // afterEnter(element) {
+    //   element.style.height = 'auto';
+    // },
   },
   computed: {
     ...mapGetters({

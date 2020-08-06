@@ -3,7 +3,7 @@
         <b-nav-item 
             v-for="item in menu.items" 
             :key="`menu_item_${item.ID}`"
-            :href="getURLPath(item.url)"
+            :to="getURLPath(item.url)"
             >
             {{item.title}}
         </b-nav-item>

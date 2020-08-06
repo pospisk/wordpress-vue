@@ -1,9 +1,10 @@
 @import "/_partials/_constants.scss";
-@import "/_partials/_fonts.scss";
+@import "/_partials/_animations.scss";
 
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+@import "/_partials/_fonts.scss";
 
 @import "/_partials/_navigation.scss";
 @import "/_partials/_general.scss";
-@import "/_partials/_works.scss";
+@import "/_partials/_post.scss";

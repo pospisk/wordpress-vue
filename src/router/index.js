@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 // Components
 import Home from '../components/Home.vue';
+import Work from '../components/Work.vue';
 import Post from '../components/Post/Post.vue';
 import Page from '../components/Page/Page.vue';
 
@@ -16,7 +17,11 @@ const router = new Router({
       component: Home,
     },
     {
-      // Assuming you're using the default permalink structure for posts
+      path: '/work',
+      name: 'Work',
+      component: Work,
+    },
+    {
       path: '/posts/:postSlug',
       name: 'Post',
       component: Post,
@@ -41,14 +46,57 @@ const router = new Router({
   },
 });
 
-router.afterEach((to) => { // (to, from)
+router.beforeEach((to, from, next) => { // (to, from)
   // Add a body class specific to the route we're viewing
   let body = document.querySelector('body');
+  const classBase = "vue--page--";
 
-  const slug = !(to.params.postSlug)
-    ? to.params.pageSlug
-    : to.params.postSlug;
-  body.classList.add('vue--page--' + slug);
+  let slug;
+  switch (from.name){
+    case "Home":
+      slug = "home";
+      break;
+    case "Post":
+      slug = from.params.postSlug;
+      break;
+    case "Page":
+      slug = from.params.pageSlug;
+      break;
+    case "Work":
+      slug = "work";
+      break;
+    default:
+      slug = "404";
+  }
+  
+  body.classList.remove(classBase + slug);
+  next();
+});
+
+router.afterEach((to, from) => { // (to, from)
+  // Add a body class specific to the route we're viewing
+  let body = document.querySelector('body');
+  const classBase = "vue--page--";
+  
+  let slug;
+  switch (to.name){
+    case "Home":
+      slug = "home";
+      break;
+    case "Post":
+      slug = to.params.postSlug;
+      break;
+    case "Page":
+      slug = to.params.pageSlug;
+      break;
+    case "Work":
+      slug = "work";
+      break;
+    default:
+      slug = "404";
+  }
+
+  body.classList.add(classBase + slug);
 });
 
 export default router;

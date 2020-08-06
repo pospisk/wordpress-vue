@@ -19,6 +19,7 @@ module.exports = {
   },
   module: {
     rules: loaders,
+    
   },
   resolve: {
     extensions: ['.js', '.css', '.vue'],

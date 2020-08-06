@@ -4,7 +4,7 @@ module.exports = {
     {
       loader: 'file-loader',
       options: {
-        name: 'http://pospisk.local/wp-content/themes/pospisk/dist/img/[name].[ext]',
+        name: '/img/[name].[ext]',
       },
     },
   ],

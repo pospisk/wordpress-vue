@@ -16,11 +16,11 @@ const createPostSlug = post => {
   return post; 
   
 };
-const createMedia = post => {
+const createPostProperties = post => {
 
   post.featured_media_url = '';
   
-  const axiosResult = async () => {
+  const axiosMedia = async () => {
     let url = SETTINGS.API_BASE_PATH + "media/" + post.featured_media;
     post.featured_media_url = await axios.get( url            
         ).then(response => {
@@ -29,12 +29,12 @@ const createMedia = post => {
           console.log(e);
         });
   }
-  axiosResult()
-  return post; 
-};
-const createAuthor = post => {
-    
-  const axiosResult = async () => {
+
+  post.author_avatar = '';
+  post.author_name = '';
+  post.author_url = '';
+
+  const axiosAuthor = async() => {
     let url = SETTINGS.API_BASE_PATH + "users/" + post.author;
     await axios.get( url            
       ).then(response => {
@@ -42,7 +42,7 @@ const createAuthor = post => {
         if(response.data.simple_local_avatar){
           post.author_avatar = response.data.simple_local_avatar['96'];  // uses https://10up.com/plugins/simple-local-avatars-wordpress/
         }else{
-          console.error("user avatar not found");
+          post.author_avatar = response.data.avatar_urls['96'];
         }
         
         post.author_name = response.data.name;
@@ -51,10 +51,11 @@ const createAuthor = post => {
         console.log(e);
       });
   }
-  axiosResult()
-  console.log(post);
+  axiosMedia();
+  axiosAuthor();
   return post; 
 };
+
 
 
 // initial state
@@ -86,8 +87,7 @@ const actions = {
     api.getPosts(limit, posts => {
       posts.map((post, i) => {
         posts[i] = createPostSlug(post);
-        posts[i] = createMedia(post);
-        posts[i] = createAuthor(post);
+        posts[i] = createPostProperties(post);
 
       });
 
