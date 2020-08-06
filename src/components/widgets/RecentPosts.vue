@@ -1,6 +1,6 @@
 <template>
   <div class="latest-posts">
-    <h3>
+    <h3 class="mb-3">
       <slot></slot>
     </h3>
     <div v-if="recentPostsLoaded" class="posts">

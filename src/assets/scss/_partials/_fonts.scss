@@ -123,4 +123,13 @@ h1, h2, h3, h4, h5, h6{
     }
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
+  }
+  
+b, strong{
+    font-weight: 600;
+      &.serif{
+          font-family: "Lora", serif;
+          font-weight: 600;
+          font-size: 110%;
+      }
 }

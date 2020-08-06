@@ -26,15 +26,17 @@
     </div>
     <div class="row my-5">
       <div class="col-12 offset-0 col-md-8 offset-md-2">
-        <h3>My Skills</h3>
+        <h3 class="mb-3">My Skills</h3>
         <div class="row">
           <div class="col-12">
             <div class="skills">
               <div class="skill">
-                <h4 class="serif">Developer</h4>
+                <img src="/wp-content/themes/pospisk/src/static/img/development.svg" alt="Web development icon; window with centerd code brackets" class="skill__icon">
+                <h4>Developer</h4>
+                <hr>
                 <p>
-                  <strong>
-                    Languages
+                  <strong class="serif">
+                    Languages:
                   </strong>
                   <ul>
                     <li>PHP</li>
@@ -44,47 +46,63 @@
                     <li>C# (C-Sharp)</li>
                   </ul>
                 </p>
-                <p>
-                  <strong>
+                <hr>
+                <p class="mb-0">
+                  <strong class="serif">
                     Tools:
                   </strong>
-                  <ul>
+                  <ul class="mb-0">
                     <li>Bootstrap</li>
                     <li>Git/Github</li>
                     <li>NPM</li>
                     <li>Underscores</li>
                     <li>Visual Studio Code</li>
                     <li>Vue.js</li>
-                    <li>WordPress</li>
+                    <li>WordPress / TYPO3</li>
                   </ul>
                 </p>
               </div>
 
               <div class="skill">
-                <h4 class="serif">Designer</h4>
+                <img src="/wp-content/themes/pospisk/src/static/img/design.svg" alt="Design icon; pen with crossed ruler" class="skill__icon">
+                <h4>Designer</h4>
+                <hr>
                 <p>
-                  <strong>
-                    What I enjoy designing
+                  <strong class="serif">
+                    I design:
                   </strong>
                   <ul>
-                    <li>Logos</li>
-                    <li>UI &amp; UX (motion animation)</li>
-                    <li>Web</li>
-                    <li>Mobile</li>
                     <li>Apps</li>
+                    <li>Animations</li>
+                    <li>Logos</li>
+                    <li>Mobile Layouts</li>
+                    <li>UI &amp; UX</li>
+                    <li>Web Layouts</li>
                   </ul>
                 </p>
-                <p>
-                  <strong>Tools:</strong>
-                  <ul>
+                <hr>
+                <p class="mb-0">
+                  <strong class="serif">
+                    Tools:
+                  </strong>
+                  <ul class="mb-0">
                     <li>
-                      Adobe Photoshop
+                      After Effects / Haiku
                     </li>
                     <li>
-                      Adobe Illustrator
+                      GSAP
                     </li>
                     <li>
-                      Adobe XD
+                      Illustrator
+                    </li>
+                    <li>
+                      Photoshop
+                    </li>
+                    <li>
+                      Lottie &amp; Bodymovin
+                    </li>
+                    <li>
+                      XD / Sketch
                     </li>
                   </ul>
                 </p>
