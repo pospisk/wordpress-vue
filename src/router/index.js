@@ -1,39 +1,39 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
 // Components
-import Home from '../components/Home.vue';
-import Work from '../components/Work.vue';
-import Post from '../components/Post/Post.vue';
-import Page from '../components/Page/Page.vue';
+import Home from "../components/Home.vue";
+import Work from "../components/Work.vue";
+import Post from "../components/Post/Post.vue";
+import Page from "../components/Page/Page.vue";
 
 Vue.use(Router);
 
 const router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
+      path: "/",
+      name: "Home",
       component: Home,
     },
     {
-      path: '/work',
-      name: 'Work',
+      path: "/work",
+      name: "Work",
       component: Work,
     },
     {
-      path: '/posts/:postSlug',
-      name: 'Post',
+      path: "/posts/:postSlug",
+      name: "Post",
       component: Post,
     },
     {
-      path: '/:pageSlug',
-      name: 'Page',
+      path: "/:pageSlug",
+      name: "Page",
       component: Page,
     },
   ],
-  mode: 'history',
-  base: '',
+  mode: "history",
+  base: "",
 
   // Prevents window from scrolling back to top
   // when navigating between components/views
@@ -46,13 +46,14 @@ const router = new Router({
   },
 });
 
-router.beforeEach((to, from, next) => { // (to, from)
+router.beforeEach((to, from, next) => {
+  // (to, from)
   // Add a body class specific to the route we're viewing
-  let body = document.querySelector('body');
+  let body = document.querySelector("body");
   const classBase = "vue--page--";
 
   let slug;
-  switch (from.name){
+  switch (from.name) {
     case "Home":
       slug = "home";
       break;
@@ -68,18 +69,19 @@ router.beforeEach((to, from, next) => { // (to, from)
     default:
       slug = "404";
   }
-  
+
   body.classList.remove(classBase + slug);
   next();
 });
 
-router.afterEach((to, from) => { // (to, from)
+router.afterEach((to, from) => {
+  // (to, from)
   // Add a body class specific to the route we're viewing
-  let body = document.querySelector('body');
+  let body = document.querySelector("body");
   const classBase = "vue--page--";
-  
+
   let slug;
-  switch (to.name){
+  switch (to.name) {
     case "Home":
       slug = "home";
       break;

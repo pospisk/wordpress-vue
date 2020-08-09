@@ -2,76 +2,77 @@
   <div class="row navbar-row">
     <b-navbar toggleable="md" type="light" class="col-12" id="navbar">
       <b-navbar-brand to="/" class="pospisk-logo">
-        <lottie :options="logoOptions" :height="auto" :width="200" v-on:animCreated="logoAnimation"/>
+        <lottie
+          :options="logoOptions"
+          :height="auto"
+          :width="200"
+          v-on:animCreated="logoAnimation"
+        />
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" class="intro" is-nav>
-        
-        <PrimaryMenu :menu="menu"/>
-
+        <PrimaryMenu :menu="menu" />
       </b-collapse>
-    </b-navbar>  
-  </div>  
+    </b-navbar>
+  </div>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import axios from "axios";
 import PrimaryMenu from "./Header/Menu.vue";
 
-import Lottie from 'vue-lottie';
-import logoData from '../../assets/json/logo-data.json';
+import Lottie from "vue-lottie";
+import logoData from "../../assets/json/logo-data.json";
 
 // import gsap from "gsap";
 // import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from "gsap/all";
-// gsap.registerPlugin(ScrollTrigger, Draggable, MotionPathPlugin); 
+// gsap.registerPlugin(ScrollTrigger, Draggable, MotionPathPlugin);
 
-export default{
+export default {
   components: {
     PrimaryMenu,
-    'lottie': Lottie
+    lottie: Lottie,
   },
- 
-  data(){
-    return{
+
+  data() {
+    return {
       menu: false,
       logoOptions: {
         animationData: logoData,
-        renderer: 'svg',
+        renderer: "svg",
         autoplay: true,
-        loop: false
-        },
-        animationSpeed: 1
-      }
+        loop: false,
+      },
+      animationSpeed: 1,
+    };
   },
 
-  beforeMount(){
+  beforeMount() {
     this.fetchMenu();
   },
 
-  mounted(){
-
-    
+  mounted() {
     var body = document.body;
-    var ifBodyHome = body.classList.contains('home');
-    if (ifBodyHome === false){
-      gsap.to(".intro", {duration: 0.5, opacity: 1});
+    var ifBodyHome = body.classList.contains("home");
+    if (ifBodyHome === false) {
+      gsap.to(".intro", { duration: 0.5, opacity: 1 });
     }
-
   },
 
   methods: {
-    fetchMenu(){
+    fetchMenu() {
       axios
-        .get('/wp-json/menus/v1/menus/primary-navigation')
-        .then(response => {
+        .get("/wp-json/menus/v1/menus/primary-navigation")
+        .then((response) => {
           this.menu = response.data;
         })
-        .catch(error => console.log("Failed to Fetch Menu from WordPress API"))
+        .catch((error) =>
+          console.log("Failed to Fetch Menu from WordPress API")
+        );
     },
     logoAnimation: function (anim) {
       this.anim = anim;
@@ -94,7 +95,7 @@ export default{
 
     onSpeedChange: function () {
       this.anim.setSpeed(this.animationSpeed);
-    }
-  }
-}
+    },
+  },
+};
 </script>

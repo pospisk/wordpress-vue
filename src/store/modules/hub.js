@@ -7,16 +7,16 @@ const state = {
   error: null,
   notice: null,
   loading: true,
-  loading_progress: 0
+  loading_progress: 0,
 };
 
 // getters
 const getters = {
-  isLoading: state => state.loading_progress < 100,
-  loadingProgress: state => state.loading_progress,
-  loadingIncrement: state => {
+  isLoading: (state) => state.loading_progress < 100,
+  loadingProgress: (state) => state.loading_progress,
+  loadingIncrement: (state) => {
     return 100 / SETTINGS.LOADING_SEGMENTS;
-  }
+  },
 };
 
 // actions
@@ -33,12 +33,12 @@ const mutations = {
 
   [types.RESET_LOADING_PROGRESS](state) {
     state.loading_progress = 0;
-  }
+  },
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

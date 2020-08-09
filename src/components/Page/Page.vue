@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import Loader from '../partials/Loader.vue';
-import { mapGetters } from 'vuex';
+import Loader from "../partials/Loader.vue";
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
     ...mapGetters({
-      page: 'page',
-      allPagesLoaded: 'allPagesLoaded',
+      page: "page",
+      allPagesLoaded: "allPagesLoaded",
     }),
 
     pageContent() {

@@ -1,23 +1,23 @@
-.navbar{
-    padding: 0 1.5em;
+.navbar {
+  padding: 0 1.5em;
 
-    &-row{
-        position: fixed;
-        top:0;
-        left: 0;
-        right: 0;
-        z-index: 999;
-    }
+  &-row {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
 }
 
-.admin-bar{
-    .navbar-row{
-        top:32px;
-    }
+.admin-bar {
+  .navbar-row {
+    top: 32px;
+  }
 }
 
-.navbar-brand.pospisk-logo{
-    svg{
-        margin-left: -14px;
-    }
+.navbar-brand.pospisk-logo {
+  svg {
+    margin-left: -14px;
+  }
 }

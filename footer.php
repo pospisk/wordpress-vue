@@ -1,3 +1,4 @@
+<script>console.log("page footer created");</script>
 <?php wp_footer(); ?>
 <?php if ( preg_match("/(.*.local|.*.loc|localhost:.*)/i", $_SERVER['HTTP_HOST']) ) : ?>
 	<!-- HMR Reloader -->

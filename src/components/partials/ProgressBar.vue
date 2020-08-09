@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  props: ["loaderStyle", "showLoader"]
+  props: ["loaderStyle", "showLoader"],
 };
 </script>

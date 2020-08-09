@@ -1,41 +1,47 @@
 <template>
   <div id="my-app" class="container-fluid">
+    <!-- <Spinner/> -->
+
     <app-header />
     <div class="row">
       <div class="col-12 p-0">
-        <transition name="loader-animation" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <transition
+          name="loader-animation"
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
           <progress-bar :show-loader="showLoader" :loader-style="loaderStyle" />
         </transition>
       </div>
     </div>
 
-    <span>{{this.prevHeight}}</span>
-
-      <div id="content" class="row content-wrapper intro">
-        <div class="col-12 content-inner">
-          <transition 
-            name="slide-fade" 
-            mode="out-in" 
-            enter-active-class="animate__animated animate__backInUp"
-            leave-active-class="animate__animated animate__backOutDown"
-          >
-            <!-- @beforeLeave="beforeLeave"
+    <div id="content" class="row content-wrapper">
+      <div class="col-12 content-inner">
+        <transition
+          name="slide-fade"
+          mode="out-in"
+          enter-active-class="animate__animated animate__backInUp"
+          leave-active-class="animate__animated animate__backOutDown"
+        >
+          <!-- @beforeLeave="beforeLeave"
             @enter="enter"
             @afterEnter="afterEnter" -->
-            <router-view></router-view>
-          </transition>
-        </div>
+          <router-view></router-view>
+        </transition>
       </div>
-
+    </div>
     <app-footer />
+
+
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
-import Header from './components/partials/Header.vue';
-import Footer from './components/partials/Footer.vue';
-import ProgressBar from './components/partials/ProgressBar.vue';
+import { mapGetters, mapActions, mapMutations } from "vuex";
+// import Spinner from "./components/Spinner.vue";
+import Header from "./components/partials/Header.vue";
+import Footer from "./components/partials/Footer.vue";
+import ProgressBar from "./components/partials/ProgressBar.vue";
 
 export default {
   data() {
@@ -44,15 +50,22 @@ export default {
       prevHeight: 0,
     };
   },
+  mounted: () => {
+      var preloaderElement = document.getElementById("preloader");
+      var preloaderInnerElement = document.getElementById("preloader-inner");
+      preloaderInnerElement.style.setProperty("top", "0");
+      // preloaderElement.style.setProperty("opacity", "0");
+      // setTimeout(() => {  
+      //   preloaderElement.remove();
+      // }, 300);
+  },
   methods: {
     // beforeLeave(element) {
     //   this.prevHeight = getComputedStyle(element).height;
     // },
     // enter(element) {
     //   const { height } = getComputedStyle(element);
-
     //   element.style.height = this.prevHeight;
-
     //   setTimeout(() => {
     //     element.style.height = height;
     //   });
@@ -63,10 +76,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isLoading: 'isLoading',
-      loadingProgress: 'loadingProgress',
+      isLoading: "isLoading",
+      loadingProgress: "loadingProgress",
     }),
-
+    
     loaderStyle() {
       return `width: ${this.loadingProgress}%;`;
     },
@@ -75,6 +88,7 @@ export default {
   components: {
     appHeader: Header,
     appFooter: Footer,
+    // Spinner,
     ProgressBar,
   },
 
@@ -83,7 +97,7 @@ export default {
     isLoading(val) {
       if (val == false) {
         let self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           self.showLoader = false;
         }, 1000);
       }
@@ -91,3 +105,5 @@ export default {
   },
 };
 </script>
+
+<style></style>

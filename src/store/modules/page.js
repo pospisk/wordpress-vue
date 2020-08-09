@@ -1,5 +1,5 @@
-import api from '../../api';
-import * as types from '../mutation-types';
+import api from "../../api";
+import * as types from "../mutation-types";
 
 // initial state
 const state = {
@@ -10,20 +10,20 @@ const state = {
 
 // getters
 const getters = {
-  allPages: state => state.all,
-  allPagesLoaded: state => state.loaded,
-  page: state => id => {
-    let field = typeof id === 'number' ? 'id' : 'slug';
-    let page = state.all.filter(page => page[field] === id);
-    return (page[0]) ? page[0] : false;
+  allPages: (state) => state.all,
+  allPagesLoaded: (state) => state.loaded,
+  page: (state) => (id) => {
+    let field = typeof id === "number" ? "id" : "slug";
+    let page = state.all.filter((page) => page[field] === id);
+    return page[0] ? page[0] : false;
   },
-  pageContent: state => id => {
-    let field = typeof id === 'number' ? 'id' : 'slug';
-    let page = state.all.filter(page => page[field] === id);
-    
-    return (page[0]) ? page[0].content.rendered : false;
+  pageContent: (state) => (id) => {
+    let field = typeof id === "number" ? "id" : "slug";
+    let page = state.all.filter((page) => page[field] === id);
+
+    return page[0] ? page[0].content.rendered : false;
   },
-  somePages: state => limit => {
+  somePages: (state) => (limit) => {
     if (state.all.length < 1) {
       return false;
     }
@@ -35,7 +35,7 @@ const getters = {
 // actions
 const actions = {
   getAllPages({ commit }) {
-    api.getPages(pages => {
+    api.getPages((pages) => {
       commit(types.STORE_FETCHED_PAGES, { pages });
       commit(types.PAGES_LOADED, true);
       commit(types.INCREMENT_LOADING_PROGRESS);
