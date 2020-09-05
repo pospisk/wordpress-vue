@@ -1,5 +1,8 @@
 const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+var PrerenderSpaPlugin = require('prerender-spa-plugin'); // Here
+var HtmlWebpackPlugin = require('html-webpack-plugin'); // And here
+
 
 const plugins = require("./plugins");
 const loaders = require("./loaders");
@@ -15,6 +18,7 @@ module.exports = {
   stats: { warnings: false }, // Hide warnings
   output: {
     path: path.resolve(__dirname, "../dist"),
+    publicPath: '/',
     filename: "scripts/[name].js",
   },
   module: {

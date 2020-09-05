@@ -1,0 +1,1 @@
+module.exports = __webpack_public_path__ + "dist/fonts/lora-v16-latin-700italic.svg";

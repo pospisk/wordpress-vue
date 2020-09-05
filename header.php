@@ -9,42 +9,160 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="manifest" href="/wp-content/themes/pospisk/src/static/manifest.json">
     <?php wp_head(); ?>
+    <title>pospisk</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Person",
+        "name": "Kristián Pospiš",
+        "url": "https://pospi.sk",
+        "image": "https://pospi.sk/wp-admin/themes/pospisk/src/static/img/kristian_pospis.png",
+        "sameAs": [
+          "https://instagram.com/pospisk",
+          "https://www.linkedin.com/in/kristian-pospi%C5%A1-39643899/",
+          "https://github.com/pospisk/",
+          "https://pospi.sk/"
+        ],
+        "jobTitle": "Web Developer and Designer"  
+      }
+    </script>
   </head>
 
   <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    
     <div id="preloader">
-      <div id="preloader-inner"></div>
       <style>
-        #preloader{
-          position: fixed;
-          top:0;
-          left:0;
-          right:0;
-          bottom:0;
-          height: 100vh;
-          width: 100%;
-          background-color: #f2f2f2;
-          opacity:1;
-          transition: all 300ms ease-in;
+        .loader {
+          -webkit-filter: url("#goo");
+                  filter: url("#goo");
+          position: relative;
+          width: 500px;
+          height: 100px;
         }
-        #preloader-inner{
-          max-width: 320px;
-          transform: translate(0%,0%);
-          transition: all 500ms ease-in;
+        .loader::after {
+          content: '';
+          display: block;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: #181818;
+          margin: 0 auto;
+          position: absolute;
+          top: 25px;
+          left: 225px;
+          -webkit-animation: scale 2.5s ease-in-out infinite;
+                  animation: scale 2.5s ease-in-out infinite;
         }
-      </style>
-      <script>console.log("page body created");</script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.1/lottie_light.min.js" integrity="sha512-2YqO78j4RhLItoZr7YdCsbUZ0aPQmnuLUW6k5dibLhWt6erh6fwf50YGTPAmFsQAtnUZPWnfMXE4JRUpqStAcw==" crossorigin="anonymous"></script>
-      <script>
-        var loaderElement = document.getElementById("preloader-inner");
+        .loader div {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #181818;
+          top: 35px;
+          left: 235px;
+          -webkit-animation: move 2.5s ease-in-out infinite alternate;
+                  animation: move 2.5s ease-in-out infinite alternate;
+        }
+        .loader div::after, .loader div::before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #181818;
+        }
+        .loader div::before {
+          left: -75px;
+        }
+        .loader div::after {
+          left: 75px;
+        }
 
-        lottie.loadAnimation({
-          container: loaderElement, // the dom element that will contain the animation
-          renderer: 'svg',
-          loop: false,
-          autoplay: true,
-          path: '/wp-content/themes/pospisk/src/assets/json/logo-data.json' // the path to the animation json
-        });
-      </script>
+        @-webkit-keyframes move {
+          0% {
+            -webkit-transform: translateX(-150px);
+                    transform: translateX(-150px);
+          }
+          100% {
+            -webkit-transform: translateX(150px);
+                    transform: translateX(150px);
+          }
+        }
+
+        @keyframes move {
+          0% {
+            -webkit-transform: translateX(-150px);
+                    transform: translateX(-150px);
+          }
+          100% {
+            -webkit-transform: translateX(150px);
+                    transform: translateX(150px);
+          }
+        }
+        @-webkit-keyframes scale {
+          10% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+          }
+          50% {
+            -webkit-transform: scale(1.25);
+                    transform: scale(1.25);
+          }
+          90% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+          }
+        }
+        @keyframes scale {
+          10% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+          }
+          50% {
+            -webkit-transform: scale(1.25);
+                    transform: scale(1.25);
+          }
+          90% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+          }
+        }
+        html, body {
+          background: #f2f2f2;
+          width: 100%;
+          height: 100%;
+        }
+
+        body {
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+                  justify-content: center;
+          overflow: hidden;
+        }
+
+        svg {
+          position: absolute;
+          z-index: -100;
+          pointer-events: none;
+        }
+
+      </style>
+      <div class="loader">
+        <div></div>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="goo">
+            <fegaussianblur in="SourceGraphic" stddeviation="15" result="blur"></fegaussianblur>
+            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -10" result="goo"></fecolormatrix>
+            <feblend in="SourceGraphic" in2="goo"></feblend>
+          </filter>
+        </defs>
+      </svg>
     </div>

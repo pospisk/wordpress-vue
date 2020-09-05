@@ -97,50 +97,6 @@ const actions = {
 // mutations
 const mutations = {
   [types.STORE_FETCHED_POSTS](state, { posts }) {
-    // let editedPosts = [];
-
-    // posts.forEach(async post =>{
-
-    // let url = SETTINGS.API_BASE_PATH + "media/" + post.featured_media;
-    // let result = await axios.get(
-    //   url
-    //   ).then(response => {
-    //     return response.data.source_url;
-    //   }).catch(e => {
-    //     console.log(e);
-    //   });
-
-    // post.featured_media_url = result;
-    // Vue.set(post, 'featured_media_url', result);
-
-    // post.featured_media = Object.assign({}, post.featured_media, {
-    //   id: post.featured_media,
-    //   url: result
-    // })
-
-    // editedPosts.push(post);
-
-    // console.log("post");
-    // console.log(post);
-
-    // Object.defineProperty(post, 'featured_media_url', {
-    //   value: result,
-    //   writable: true
-    // });
-
-    // Vue.set(editedPosts,i , post);
-
-    // this.$set(this.post.featured_media, 'url', result);
-
-    // $set(post.featured_media, 'url', result);
-    // state.recent = editedPosts;
-    // });
-
-    // console.log('edited posts');
-    // console.log(editedPosts);
-
-    // state.recent = editedPosts;
-    // console.log(posts);
     state.recent = posts;
   },
 

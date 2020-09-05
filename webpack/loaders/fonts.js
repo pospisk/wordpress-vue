@@ -4,7 +4,7 @@ module.exports = {
     loader: "file-loader",
     options: {
       name:
-        "http://pospisk.local/wp-content/themes/pospisk/dist/fonts/[name].[ext]",
+        "dist/fonts/[name].[ext]",
     },
   },
 };

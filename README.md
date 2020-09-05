@@ -26,3 +26,12 @@ All of the code you're going to edit is located in `/src/`. From there it's brok
   - `/vendor` 3rd party scripts and libraries
 
 All scripts and styles in `/src` are compiled down to the `/dist` directory, which is what you will deploy. **When you're ready to deploy don't deploy the src/ directory.**
+
+
+
+## TO-DO
+
+- Navbar Desktop / Mobile
+- About Page: Custom Post Type, Timeline
+- Works Page: add more content
+- Home Page: optimize animation load

@@ -1,8 +1,8 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <div id="tlIntro" class="row d-flex flex-row-reverse flex-md-row">
-        <div class="col-12 col-md-6">
+      <div id="tlIntro" class="row mb-5 d-flex min-vh-80 flex-row-reverse flex-md-row personal__wrapper">
+        <div class="col-12 col-lg-6 align-self-center">
           <div class="pospisk-illustration" id="pospisk-illustration">
             <lottie
               :options="illustrationOptions"
@@ -12,30 +12,34 @@
             <div class="pospisk-illustration-bg"></div>
           </div>
         </div>
-        <div class="col-12 col-md-6 align-self-center personal">
-          <h1 class="reveal--title">
-            Kristian Pospis<span class="reveal--box"></span>
-          </h1>
-          <h2 class="serif reveal--title">
-            web developer &amp; designer<span class="reveal--box"></span>
-          </h2>
-          <p>
-            I’m a perfectionist who focuses on front-end development with a
-            passion for creating interactive content.
-            <br />
-            In 2019 I have graduated from Web Development (B.Sc) at UCL in
-            Odense, Denmark. Previously I have studied Multimedia Design and
-            Communication (AP) at EAL (former UCL, 2015) in Odense.
-          </p>
+        <div class="col-12 col-lg-6 align-self-center personal">
+          <div class="personal__inner">
+            <h1>
+              Kristian Pospis
+            </h1>
+            <h2 class="serif mb-3">
+              web developer &amp; designer
+            </h2>
+            <p>
+              I’m a perfectionist who focuses on <strong>front-end</strong> development with a
+              passion for creating interactive content.
+            </p>
+            <p>
+              In 2019, I have graduated from <strong>Web Development (B.Sc.)</strong> at UCL in
+              Odense, Denmark. Previously I have studied <strong>Multimedia Design and
+              Communication (AP)</strong> at EAL (former UCL, 2015) in Odense.
+            </p>
+          </div>
         </div>
+        <a class="scroll--down" href="#tlPosts"></a>
       </div>
-      <div id="tlPosts" class="row my-5 min-vh-100 align-items-center">
-        <div class="col-12">
-          <recent-posts-widget limit="3">Latest Work</recent-posts-widget>
-        </div>
+      <div id="tlPosts" class="row min-vh-80 align-items-center maxw-lg">
+          <div class="col-12 my-5">
+            <recent-posts-widget limit="3">Latest Work</recent-posts-widget>
+          </div>
       </div>
-      <div id="tlSkills" class="row my-5 min-vh-100 align-items-center">
-        <div class="col-12 offset-0 col-md-8 offset-md-2">
+      <div id="tlSkills" class="row min-vh-80 align-items-center maxw-lg">
+        <div class="col-12 offset-0 my-5 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
           <h3 class="mb-3 reveal--title">
             My Skills<span class="reveal--box"></span>
           </h3>
@@ -44,7 +48,7 @@
               <div class="skills">
                 <div class="skill">
                   <img
-                    src="/wp-content/themes/pospisk/src/static/img/development.svg"
+                    src="/wp-content/themes/pospisk/src/static/img/design.svg"
                     alt="Web development icon; window with centerd code brackets"
                     class="skill__icon"
                   />
@@ -79,7 +83,7 @@
 
                 <div class="skill">
                   <img
-                    src="/wp-content/themes/pospisk/src/static/img/design.svg"
+                    src="/wp-content/themes/pospisk/src/static/img/development.svg"
                     alt="Design icon; pen with crossed ruler"
                     class="skill__icon"
                   />
@@ -159,6 +163,10 @@ export default {
     return {
       animationStatus: false,
       menu: false,
+      logoPlayed: false,
+      tlintro: gsap.timeline(),
+      tlposts: gsap.timeline(),
+      tlskills: gsap.timeline(),
       illustrationAnim: "",
       illustrationOptions: {
         animationData: illustrationData,
@@ -170,16 +178,36 @@ export default {
       animationSpeed: 1,
     };
   },
-  beforeCreate: () => {
-    console.log("beforeCreate");
-  },
-  destroyed: () => {
-    console.log("destroyed");
-  },
   methods: {
     illustrationAnimation: function (anim) {
       this.anim = anim;
       this.illustrationAnim = this.anim;
+    },
+    initSegment: function() {
+      var iAnim = this.illustrationAnim;
+      iAnim.playSegments([0, 40], true);
+      iAnim.onComplete = () => {
+        this.blinkSegment();
+      };
+    },
+    blinkSegment: function() {
+      var iAnim = this.illustrationAnim;
+      iAnim.playSegments([40, 65], true);
+      iAnim.onComplete = () => {
+        setTimeout(() => {
+          this.blinkSegment();
+        }, 6500);
+      };
+    },
+    illustrationStart: function() {
+
+      this.initSegment();
+
+      this.mouseTrackerOn();
+
+      window.addEventListener("click", (e) => {
+        this.blinkSegment();
+      });
     },
     mouseToEye: function () {
       var e;
@@ -221,14 +249,13 @@ export default {
     mouseTrackerOn: function () {
       window.addEventListener("mousemove", this.mouseToEye);
       this.animationStatus = true;
-      // console.log("tracker on");
+
     },
     mouseTrackerOff: function () {
       window.removeEventListener("mousemove", this.mouseToEye);
       this.animationStatus = false;
 
       // reset the eyes
-
       gsap.to("#left-eyeball", {
         x: 0,
         y: 0,
@@ -239,210 +266,246 @@ export default {
         y: 0,
         duration: 1,
       });
-
-      // console.log("tracker off");
     },
-    updateScroll() {
+    updateScroll: function() {
       const scrollPosition = window.scrollY;
+      const homeClassList = document.body.classList.value;
+      
+      const isHome = homeClassList.match(/vue--page--home/g);
 
-      if (scrollPosition > 350) {
-        if (this.animationStatus === true) {
-          this.mouseTrackerOff();
-        }
-      } else {
-        if (this.animationStatus === false) {
-          this.mouseTrackerOn();
+      if(isHome !== null){
+
+        if (scrollPosition > 350) {
+
+          if (this.animationStatus === true) {
+
+            this.mouseTrackerOff();
+
+          }
+
+        } else {
+
+          if (this.animationStatus === false) {
+
+            this.mouseTrackerOn();
+
+          }
         }
       }
+
     },
+    destroyTlSt: function(){
+      this.killTimeline(this.tlintro);
+      this.killTimeline(this.tlposts);
+      this.killTimeline(this.tlskills);
+
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    },
+    killTimeline: (timeline) => {
+      const targets = timeline.getChildren();
+      
+      timeline.kill();
+      
+      for(let i = 0; i < targets.length; i++) {
+        if(targets[i].targets().length) {
+          gsap.set(targets[i].targets(), {clearProps:"all"});
+        }
+      }
+    }
+  },
+  created(){
+    window.document.title = "Kristián Pospiš - pospisk";
+
+    var meta_desc = document.createElement('meta');
+    meta_desc.setAttribute('name', 'description');
+    meta_desc.setAttribute('content', 'This is the portfolio of Kristián Pospiš');
+    document.getElementsByTagName('head')[0].appendChild(meta_desc);
+
+    var meta_robots = document.createElement('meta');
+    meta_robots.setAttribute('name', 'robots');
+    meta_robots.setAttribute('content', 'index');
+    document.getElementsByTagName('head')[0].appendChild(meta_robots);
+
   },
   mounted() {
-    console.log("page mounted");
-    var tlintro = gsap.timeline();
-    tlintro
-      .fromTo('#tlIntro .reveal--box', {
-        scaleX: 0,
-        },
-      {
-        scaleX: 1,
-        duration: 1,
-        ease: "power4.in",
-      })
-      .to('#tlIntro .reveal--title', {
-        color: "#181818",
-        duration: 0.01,
-      })
-      .fromTo('#tlIntro .reveal--box', {
-        scaleX: 1,
-      }, 
-      {
-        scaleX: 0,
-        duration: 1,
-        ease: "power4.out", 
-      });
-
     
 
-    var tlposts = gsap.timeline();
-    tlposts
-      .fromTo('#tlPosts .reveal--box', {
-        scaleX: 0,
+    if(this.$parent.pageInit == false){
+      this.$parent.pageInit = true;
+      var logoWidth = 200 / 2;
+      var logoHeight = 66 / 2;
+      var windowHeight = window.innerHeight / 2 - logoHeight;
+      var windowWidth = window.innerWidth / 2 - logoWidth;
+
+      this.tlintro = gsap.timeline({
+        delay: 2.5,
+        repeat: 0,
+        repeatDelay: 0,
+        repeatRefresh: false,
+        defaults: {
+          ease: "power1.out"
         },
-      {
-        scaleX: 1,
-        duration: 1,
-        ease: "power4.in",
-      }
-      )
-      .to('#tlPosts .reveal--title', {
-        color: "#181818",
-        duration: 0.01,
+        smoothChildTiming: true,
+        autoRemoveChildren: true,
+        onComplete: this.illustrationStart,
+      });
+
+      this.tlintro
+      .from(".pospisk-logo", {
+        duration: 0.5, 
+        x: windowWidth, 
+        y: windowHeight,
+        scale: 1.5, 
+        z: 999
       })
+      .from("#navbar-toggler",{
+        x: 100,
+        duration: 0.5, 
+      },"-=0.5");
+
+    }else{
+      this.tlintro = gsap.timeline({
+        delay: 0,
+        repeat: 0,
+        repeatDelay: 0,
+        repeatRefresh: false,
+        defaults: {
+          ease: "power1.out"
+        },
+        smoothChildTiming: true,
+        autoRemoveChildren: true,
+        onComplete: this.illustrationStart,
+      });
+    }
+
+    this.tlintro
+      .from(".personal__inner > *", {
+        x: "500",
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.in",
+        stagger: 0.1,
+      },"-=1")
+      .from(".pospisk-illustration-bg", {
+        scale: 0,
+        duration: 0.5
+      })
+      .from(".scroll--down", {
+        opacity: 0,
+        duration: 0.3,
+        clearProps: "all"
+      });
+      
+
+    this.tlposts
+      .set('#tlPosts .reveal--title', 
+        {
+          color: "rgba(0,0,0,0)",
+        }
+      )
+      .fromTo('#tlPosts .reveal--box', 
+        {
+          scaleX: 0,
+        },
+        {
+          scaleX: 1,
+          duration: 3,
+          delay: 2,
+          ease: "power4.in",
+        }
+      )
+      .fromTo('#tlPosts .reveal--title', 
+        {
+          color: "rgba(0,0,0,0)",
+        },
+        {
+          color: "#181818"
+        }
+      )
       .fromTo('#tlPosts .reveal--box', {
         scaleX: 1,
       }, 
       {
         scaleX: 0,
-        duration: 1,
+        duration: 3,
         ease: "power4.out", 
       }
       )
       .from(".post", {
         x: "100vw",
-        duration: 1,
+        duration: 2,
         ease: "power4.in",
         stagger: 0.2,
+      });
+
+    this.tlskills
+      .set('#tlSkills .reveal--title', 
+        {
+          color: "rgba(0,0,0,0)",
+        }
+      )
+      .fromTo('#tlSkills .reveal--box', 
+        {
+          scaleX: 0,
+        },
+        {
+          scaleX: 1,
+          duration: 1,
+          delay: 2,
+          ease: "power4.in",
+        }
+      )
+      .fromTo('#tlSkills .reveal--title', 
+        {
+          color: "rgba(0,0,0,0)",
+        },
+        {
+          color: "#181818"
+        }
+      )
+      .fromTo('#tlSkills .reveal--box', 
+        {
+          scaleX: 1,
+        }, 
+        {
+          scaleX: 0,
+          duration: 1,
+          ease: "power4.out", 
+        }
+      )
+      .from(".skill", {
+        y: 600,
+        duration: 10,
+        ease: "power4.out",
+        stagger: 4,
       });
 
     ScrollTrigger.create({
       trigger: "#tlPosts",
       start: "top bottom-=100",
       end: "top center",
-      animation: tlposts,
+      animation: this.tlposts,
       scrub: true,
-      markers: true,
       toggleActions: "play none reverse none",
+      id: "tlPosts",
     });
-
-    var tlskills = gsap.timeline();
-    tlskills
-      .fromTo('#tlSkills .reveal--box', {
-        scaleX: 0,
-        },
-      {
-        scaleX: 1,
-        duration: 1,
-        ease: "power4.in",
-      }
-      )
-      .to('#tlSkills .reveal--title', {
-        color: "#181818",
-        duration: 0.01,
-      })
-      .fromTo('#tlSkills .reveal--box', {
-        scaleX: 1,
-      }, 
-      {
-        scaleX: 0,
-        duration: 1,
-        ease: "power4.out", 
-      }
-      )
-      .from(".skill", {
-        y: 400,
-        duration: 1,
-        ease: "power4.in",
-        stagger: 0.2,
-      });
 
     ScrollTrigger.create({
       trigger: "#tlSkills",
       start: "top bottom-=100",
       end: "top center",
-      animation: tlskills,
+      animation: this.tlskills,
       scrub: true,
-      markers: true,
       toggleActions: "play none reverse none",
+      id: "tlSkills",
     });
 
     window.addEventListener("scroll", this.updateScroll);
 
-    var iAnim = this.illustrationAnim;
-
-    function initSegment() {
-      // Lottie Animation Instance
-      iAnim.playSegments([0, 40], true);
-
-      // Lottie onComplete Event
-      iAnim.onComplete = function () {
-        blinkSegment();
-      };
-    }
-
-    function blinkSegment() {
-      // Lottie Animation Instance
-      iAnim.playSegments([40, 65], true);
-
-      // Lottie onComplete Event
-      iAnim.onComplete = function () {
-        setTimeout(() => {
-          blinkSegment();
-        }, 6500);
-      };
-    }
-
-    const illustrationStart = () => {
-      initSegment();
-
-      this.mouseTrackerOn();
-
-      window.addEventListener("click", (e) => {
-        blinkSegment();
-      });
-    };
-
-    // var illustration = document.querySelector("#pospisk-illustration div");
-    // var illustrationOffset = illustration.getBoundingClientRect();
-
-    // var elementTop = illustrationOffset.top;
-    // var elementLeft = illustrationOffset.left;
-    // var elementWidth = illustrationOffset.width;
-    // var elementHeight = illustrationOffset.height;
-
-    // // Create a timeline
-    // let tl = gsap.timeline({
-    //   delay: 3.5,
-    //   // paused: true, // default is false
-    //   repeat: 0, // number of repeats (-1 for infinite)
-    //   repeatDelay: 1, // seconds between repeats
-    //   repeatRefresh: true, // invalidates on each repeat
-    //   // yoyo: true, // if true > A-B-B-A, if false > A-B-A-B
-    //   defaults: { // children inherit these defaults
-    //     ease: "power1.out"
-    //   },
-    //   smoothChildTiming: true,
-    //   autoRemoveChildren: true,
-    //   onComplete: illustrationStart,
-    //   // other callbacks:
-    //   // onStart, onUpdate, onRepeat, onReverseComplete
-    //   // Each callback has a params property as well
-    //   // i.e. onUpdateParams (Array)
-    // });
-
-    // var logoWidth = 200 / 2;
-    // var logoHeight = 66 / 2;
-    // var windowHeight = window.innerHeight / 2 - logoHeight;
-    // var windowWidth = window.innerWidth / 2 - logoWidth;
-
-    // // Sequence multiple tweens
-
-    // tl
-    // .from(".pospisk-logo", {duration: 0.5, x: windowWidth, y: windowHeight, z: 999})
-    // .to(".intro", {duration: 0.5, opacity: 1})
-    // .from(".personal *", {duration: 1, x: 300, stagger: 0.1, ease: "power2.out"})
-    // .from(".pospisk-illustration-bg", {duration: 1, width:0, height:0, ease: "power2.out"});
-
-    illustrationStart();
+  },
+  beforeDestroy() {
+    this.destroyTlSt();
+    this.mouseTrackerOff();
   },
 };
 </script>

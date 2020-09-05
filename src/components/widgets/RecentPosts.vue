@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import axios from "axios";
+import { mapGetters } from "vuex";
 import SETTINGS from "../../settings";
 import "regenerator-runtime";
 

@@ -1,1 +1,1 @@
-module.exports = __webpack_public_path__ + "http://pospisk.local/wp-content/themes/pospisk/dist/fonts/open-sans-v17-latin-700.svg";
+module.exports = __webpack_public_path__ + "dist/fonts/open-sans-v17-latin-700.svg";

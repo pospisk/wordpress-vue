@@ -1,6 +1,10 @@
 <template>
-  <b-navbar-nav v-if="menu" class="ml-auto">
+  <b-navbar-nav v-if="menu">
     <b-nav-item
+      link-classes="link__sliced"
+      :link-attrs="{
+        'data-text': item.title
+        }"
       v-for="item in menu.items"
       :key="`menu_item_${item.ID}`"
       :to="getURLPath(item.url)"

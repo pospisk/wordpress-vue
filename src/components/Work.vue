@@ -3,7 +3,8 @@
     <div class="col-12">
       <div class="row">
         <div class="col-12">
-          <recent-posts-widget>Work</recent-posts-widget>
+          <h1>Work</h1>
+          <recent-posts-widget></recent-posts-widget>
         </div>
       </div>
     </div>
@@ -24,7 +25,9 @@ export default {
     RecentPostsWidget,
     PagesWidget,
   },
-
+  created(){
+    window.document.title = "Work - pospisk";
+  },
   mounted() {
     // // Create a timeline
     // let tl = gsap.timeline({

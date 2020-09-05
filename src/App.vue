@@ -22,11 +22,11 @@
           mode="out-in"
           enter-active-class="animate__animated animate__backInUp"
           leave-active-class="animate__animated animate__backOutDown"
+          @beforeLeave="beforeLeave"
+          @enter="enter"
+          @afterEnter="afterEnter"
         >
-          <!-- @beforeLeave="beforeLeave"
-            @enter="enter"
-            @afterEnter="afterEnter" -->
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </transition>
       </div>
     </div>
@@ -43,36 +43,41 @@ import Header from "./components/partials/Header.vue";
 import Footer from "./components/partials/Footer.vue";
 import ProgressBar from "./components/partials/ProgressBar.vue";
 
+import gsap from "gsap";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(CSSRulePlugin, ScrollTrigger);
+
 export default {
   data() {
     return {
       showLoader: true,
       prevHeight: 0,
+      pageInit: false,
     };
   },
-  mounted: () => {
-      var preloaderElement = document.getElementById("preloader");
-      var preloaderInnerElement = document.getElementById("preloader-inner");
-      preloaderInnerElement.style.setProperty("top", "0");
-      // preloaderElement.style.setProperty("opacity", "0");
-      // setTimeout(() => {  
-      //   preloaderElement.remove();
-      // }, 300);
+  mounted() {
+    this.pageInit = true;
+    window.scrollTo(0,0);
+    var preloaderElement = document.getElementById("preloader");
+    preloaderElement.remove();
   },
   methods: {
-    // beforeLeave(element) {
-    //   this.prevHeight = getComputedStyle(element).height;
-    // },
-    // enter(element) {
-    //   const { height } = getComputedStyle(element);
-    //   element.style.height = this.prevHeight;
-    //   setTimeout(() => {
-    //     element.style.height = height;
-    //   });
-    // },
-    // afterEnter(element) {
-    //   element.style.height = 'auto';
-    // },
+    beforeLeave(element) {
+      this.prevHeight = getComputedStyle(element).height;
+    },
+    enter(element) {
+      const { height } = getComputedStyle(element);
+      element.style.height = this.prevHeight;
+      setTimeout(() => {
+        element.style.height = height;
+      });
+    },
+    afterEnter(element) {
+      element.style.height = 'auto';
+      ScrollTrigger.refresh();
+    },
   },
   computed: {
     ...mapGetters({
