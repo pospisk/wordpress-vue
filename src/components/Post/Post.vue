@@ -140,8 +140,12 @@ export default {
               .then((response) => {
                 if (response.data.simple_local_avatar) {
                   this.post.author_avatar = response.data.simple_local_avatar["96"]; // uses https://10up.com/plugins/simple-local-avatars-wordpress/
+                  console.log(this.post.author_avatar);
+                  
                 } else {
                   this.post.author_avatar = response.data.avatar_urls["96"];
+                  console.log(this.post.author_avatar);
+                  
                 }
 
                 console.log("response")

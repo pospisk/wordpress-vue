@@ -6,7 +6,6 @@ import Home from "../components/Home.vue";
 import Timeline from "../components/Timeline/Timeline.vue";
 import TimelineItem from "../components/Timeline/TimelineItem.vue";
 import Work from "../components/Work.vue";
-import Contact from "../components/Contact.vue";
 import Post from "../components/Post/Post.vue";
 import Page from "../components/Page/Page.vue";
 
@@ -28,11 +27,6 @@ const router = new Router({
       path: "/work",
       name: "Work",
       component: Work,
-    },
-    {
-      path: "/contact",
-      name: "Contact",
-      component: Contact,
     },
     {
       path: "/posts/:postSlug",

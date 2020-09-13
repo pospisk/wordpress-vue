@@ -1,23 +1,25 @@
-.progress {
-  background-color: unset;
-}
-
-.loader {
-  .progress-bar {
-    background-color: $primary-color;
-  }
-}
-
 body {
   background-color: #f2f2f2;
   overflow-x: hidden;
   position: relative;
 }
 
+.btn.btn-primary{
+  border: 1px solid $primary-color;
+  background-color: unset;
+  color: $primary-color;
+  transition: background-color 250ms ease, color 250ms ease, border 250ms ease;
+  &:hover, &:active{
+    background-color: $primary-color !important;
+    color: #ffffff;
+    transition: background-color 250ms ease, color 250ms ease, border 250ms ease;
+  }
+}
+
 .content {
   &-wrapper {
     margin: 100px 64px 0 64px;
-    // page nav space
+    min-height: 100vh;
     margin-top: 100px;
     @media (max-width: 767px) {
       margin: 0 32px;
@@ -35,6 +37,26 @@ body {
     }
   }
 }
+.page-content{
+  max-width: 1000px;
+  margin: 0 auto;
+  .content-text{
+    width: 100%;
+    margin: 0 auto;
+    @media (min-width:768px){
+      width: 60%;
+    }
+  }
+}
+
+.contact-image{
+  figure{
+    background-color: #ffffff;
+    border-radius: 100px;
+    padding: 2em;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.05);
+  }
+}
 
 .intro {
   transition: opacity 1500ms ease-in-out;
@@ -48,14 +70,17 @@ body {
 .scroll{
 
   &--down{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translatex(-50%);
-    opacity: 0.5;
-    transition: all 200ms ease-in-out;
+    display: block;
+    margin: 0 auto;
+    
     @media (max-width: 991px) {
+      position: absolute;
       bottom: -2.5em;
+      left: 50%;
+      transform: translatex(-50%);
+      opacity: 0.5;
+      transition: all 200ms ease-in-out;
+      display: none;
     }
     &:hover{
       opacity: 1;
@@ -94,6 +119,14 @@ body {
     @media (min-width: 1200px) {
       max-width: 600px;
     }
+    .btn{
+      display: inline;
+      @media (min-width: 992px){
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+      }
+    }
     h1 {
       // font-size: 3.052em;
       font-weight: 700;
@@ -130,7 +163,7 @@ body {
     }
 
     &-bg {
-      background-image: url("https://pospisk.local/wp-content/themes/pospisk/dist/fonts/blob.svg");
+      background-image: url("../../public/img/blob.svg");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;

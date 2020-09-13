@@ -145,3 +145,33 @@
 .spacer{
 	height: 200px;
 }
+
+.flex-basis-none{
+	flex-basis: unset !important;
+}
+
+.block--scrolling{
+	height: 98vh;
+	overflow: hidden;
+}
+
+.admin-bar{
+	
+	.block-scrolling{
+		height: calc( 100vh - 46px);
+		@media (min-width:782px){
+			height: calc( 100vh - 32px);
+		}
+	}
+}
+
+.loader {
+	border-radius: 0px !important;
+	.progress-bar {
+		background-color: $primary-color;
+	}
+}
+
+#wpadminbar{
+	position: fixed;
+}

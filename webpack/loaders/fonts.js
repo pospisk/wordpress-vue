@@ -1,10 +1,11 @@
 module.exports = {
-  test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+  test: /\.(woff|woff2|eot|ttf)$/,
   use: {
     loader: "file-loader",
     options: {
-      name:
-        "dist/fonts/[name].[ext]",
+      name: "[name].[ext]",
+      outputPath: "fonts",
+      publicPath: "/wp-content/themes/pospisk/dist/fonts"
     },
   },
 };

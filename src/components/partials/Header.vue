@@ -36,10 +36,6 @@ import PrimaryMenu from "./Header/Menu.vue";
 import Lottie from "vue-lottie";
 import logoData from "../../assets/json/logo-data.json";
 
-// import gsap from "gsap";
-// import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from "gsap/all";
-// gsap.registerPlugin(ScrollTrigger, Draggable, MotionPathPlugin);
-
 export default {
   components: {
     PrimaryMenu,
@@ -108,9 +104,6 @@ export default {
         (!window.requestAnimationFrame)
           ? setTimeout(this.autoHideHeader, 250)
           : requestAnimationFrame(this.autoHideHeader);
-      }
-      if(this.scroll.position.current < 15){
-        navbar.classList.remove('bg');
       }
 
     },

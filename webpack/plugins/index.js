@@ -14,7 +14,6 @@ plugins = [
   }),
 
   new webpack.LoaderOptionsPlugin({ minimize: true }),
-  new ExtractTextPlugin("styles.css"),
   new VueLoaderPlugin(),
 ];
 

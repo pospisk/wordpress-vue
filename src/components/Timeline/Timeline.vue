@@ -4,7 +4,7 @@
             <div class="row about">
                 <div class="col-12 offset-0 col-lg-4 offset-lg-2">
                     <div class="about__img">
-                        <img src="https://pospisk.local/wp-content/themes/pospisk/src/static/img/kristian_pospis.png" alt="">
+                        <img src="../../public/img/kristian_pospis.png" alt="Kristián Pospiš photo">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 col-xl-6 about__content">
@@ -15,9 +15,9 @@
                         web developer and designer
                     </h3>
                     <p>
-                        I’m a perfectionist who focuses on front-end development with a passion for creating interactive content and UI. I am 24 years old with 13 years of experience in Photoshop and 8 years of expeirence in Illustrator. 
+                        I’m a perfectionist who focuses on front-end development with a passion for creating interactive content and UI. I am 24 years old with 13 years of experience in Photoshop and 8 years of experience in Illustrator. 
                     </p>
-                    <router-link to="" tags="a" class="btn btn-primary">CV</router-link>
+                    <a class="btn btn-primary" :href="kpcvpdf" download>Download CV</a>
                 </div>
             </div>
             <div class="row mb-5">
@@ -36,6 +36,8 @@ import Loader from "../partials/Loader.vue";
 import TimelineItems from "../widgets/TimelineItems.vue";
 import SETTINGS from "../../settings";
 
+import kpcvpdf from "../../public/kp-cv.pdf";
+
 import gsap from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -50,6 +52,7 @@ export default {
     data() {
         return {
             timeline: false,
+            kpcvpdf: kpcvpdf,
             tlAbout: gsap.timeline(),
         };
     },
@@ -60,6 +63,7 @@ export default {
     },
     created() {
         window.document.title = "About - pospisk";
+        console.log(kpcvpdf);
     },
     mounted() {
         // this.tlAbout

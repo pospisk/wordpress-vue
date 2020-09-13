@@ -29,9 +29,10 @@
               Odense, Denmark. Previously I have studied <strong>Multimedia Design and
               Communication (AP)</strong> at EAL (former UCL, 2015) in Odense.
             </p>
+            <a class="btn btn-primary" :href="kpcvpdf" download>Download CV</a>
           </div>
         </div>
-        <a class="scroll--down" href="#tlPosts"></a>
+        <span class="scroll--down"></span>
       </div>
       <div id="tlPosts" class="row min-vh-80 align-items-center maxw-lg">
           <div class="col-12 my-5">
@@ -48,8 +49,8 @@
               <div class="skills">
                 <div class="skill">
                   <img
-                    src="/wp-content/themes/pospisk/src/static/img/design.svg"
-                    alt="Web development icon; window with centerd code brackets"
+                    src="../public/img/design.svg"
+                    alt="Web development icon; window with centered code brackets"
                     class="skill__icon"
                   />
                   <h4>Developer</h4>
@@ -83,7 +84,7 @@
 
                 <div class="skill">
                   <img
-                    src="/wp-content/themes/pospisk/src/static/img/development.svg"
+                    src="../public/img/development.svg"
                     alt="Design icon; pen with crossed ruler"
                     class="skill__icon"
                   />
@@ -143,6 +144,8 @@
 import RecentPostsWidget from "./widgets/RecentPosts.vue";
 import PagesWidget from "./widgets/Pages.vue";
 
+import kpcvpdf from "../public/kp-cv.pdf";
+
 import gsap from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -162,6 +165,7 @@ export default {
   data() {
     return {
       animationStatus: false,
+      kpcvpdf: kpcvpdf,
       menu: false,
       logoPlayed: false,
       tlintro: gsap.timeline(),
@@ -200,7 +204,6 @@ export default {
       };
     },
     illustrationStart: function() {
-
       this.initSegment();
 
       this.mouseTrackerOn();
@@ -325,12 +328,10 @@ export default {
     meta_robots.setAttribute('name', 'robots');
     meta_robots.setAttribute('content', 'index');
     document.getElementsByTagName('head')[0].appendChild(meta_robots);
-
   },
   mounted() {
-    
-
     if(this.$parent.pageInit == false){
+      document.getElementById('my-app').classList.add('block--scrolling');
       this.$parent.pageInit = true;
       var logoWidth = 200 / 2;
       var logoHeight = 66 / 2;
@@ -350,18 +351,45 @@ export default {
         onComplete: this.illustrationStart,
       });
 
-      this.tlintro
-      .from(".pospisk-logo", {
-        duration: 0.5, 
-        x: windowWidth, 
-        y: windowHeight,
-        scale: 1.5, 
-        z: 999
-      })
-      .from("#navbar-toggler",{
-        x: 100,
-        duration: 0.5, 
-      },"-=0.5");
+      if(window.innerWidth < 768){
+
+        this.tlintro
+        .from(".pospisk-logo", {
+          duration: 0.5, 
+          x: windowWidth, 
+          y: windowHeight,
+          scale: 1.5, 
+          z: 999
+        })
+        .from("#navbar-toggler",
+        {
+          x: 100,
+          duration: 0.5, 
+        }, "-=0.5")
+        .add(function(){
+          document.getElementById('my-app').classList.remove('block--scrolling');
+        });
+        
+      }else{
+        this.tlintro
+        .from(".pospisk-logo", {
+          duration: 0.5, 
+          x: windowWidth, 
+          y: windowHeight,
+          scale: 1.5, 
+          z: 999
+        })
+        .from("#nav-collapse",
+        {
+          x: 350,
+          opacity: 0,
+          duration: 0.5,
+        })        
+        .add(function(){
+          document.getElementById('my-app').classList.remove('block--scrolling');
+        });
+        
+      }
 
     }else{
       this.tlintro = gsap.timeline({
@@ -450,7 +478,7 @@ export default {
         },
         {
           scaleX: 1,
-          duration: 1,
+          duration: 5,
           delay: 2,
           ease: "power4.in",
         }
@@ -469,7 +497,7 @@ export default {
         }, 
         {
           scaleX: 0,
-          duration: 1,
+          duration: 5,
           ease: "power4.out", 
         }
       )

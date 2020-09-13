@@ -7,7 +7,7 @@
       charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <link rel="manifest" href="/wp-content/themes/pospisk/src/static/manifest.json">
+    <link rel="manifest" href="/wp-content/themes/pospisk/src/public/manifest.json">
     <?php wp_head(); ?>
     <title>pospisk</title>
     <script type="application/ld+json">
@@ -16,7 +16,7 @@
         "@type": "Person",
         "name": "Kristián Pospiš",
         "url": "https://pospi.sk",
-        "image": "https://pospi.sk/wp-admin/themes/pospisk/src/static/img/kristian_pospis.png",
+        "image": "/wp-content/themes/pospisk/src/public/manifest.json",
         "sameAs": [
           "https://instagram.com/pospisk",
           "https://www.linkedin.com/in/kristian-pospi%C5%A1-39643899/",
