@@ -12,7 +12,7 @@
                         Kristian Pospis
                     </h2>
                     <h3 class="serif">
-                        web developer and designer
+                        web developer &amp; designer
                     </h3>
                     <p>
                         I’m a perfectionist who focuses on front-end development with a passion for creating interactive content and UI. I am 24 years old with 13 years of experience in Photoshop and 8 years of experience in Illustrator. 
@@ -63,7 +63,15 @@ export default {
     },
     created() {
         window.document.title = "About - pospisk";
-        console.log(kpcvpdf);
+        var meta_desc = document.createElement('meta');
+        meta_desc.setAttribute('name', 'description');
+        meta_desc.setAttribute('content', 'Kristian Pospis, professional front-end developer and designer with a passion for interactive content. Based in Denmark and Germany.');
+        document.getElementsByTagName('head')[0].appendChild(meta_desc);
+
+        var meta_robots = document.createElement('meta');
+        meta_robots.setAttribute('name', 'robots');
+        meta_robots.setAttribute('content', 'index');
+        document.getElementsByTagName('head')[0].appendChild(meta_robots);
     },
     mounted() {
         // this.tlAbout

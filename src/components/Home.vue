@@ -321,7 +321,7 @@ export default {
 
     var meta_desc = document.createElement('meta');
     meta_desc.setAttribute('name', 'description');
-    meta_desc.setAttribute('content', 'This is the portfolio of Kristián Pospiš');
+    meta_desc.setAttribute('content', 'Kristian Pospis, professional front-end developer and designer with a passion for interactive content. Based in Denmark and Germany.');
     document.getElementsByTagName('head')[0].appendChild(meta_desc);
 
     var meta_robots = document.createElement('meta');

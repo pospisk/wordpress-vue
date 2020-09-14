@@ -1,27 +1,8 @@
 <template>
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-12 postview maxw-lg">
       <template v-if="post">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="postview__title">{{ post.title.rendered }}</h1>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-3">
-            <div class="postview__info">
-              <div class="postview__info--item">
-                <strong>Date</strong>
-                {{ post.date | truncate(10, '') }}
-              </div>
-              <div class="postview__info--item">
-                <strong>Author</strong>
-                {{post.author_name}}
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-9 postview__body" v-html="post.content.rendered"></div>
-        </div>
+        <img class="img-fluid postview__header" :src="postImage" :alt="postImageAlt" />
         <ul class="arrow__links">
           <li v-if="prevPost.slug == 'null'" class="arrow__link">
             <router-link to="/null" tag="a" class="arrow__href disabled">
@@ -61,7 +42,28 @@
             </router-link>
           </li>
         </ul>
-        <img class="img-fluid postview__header" :src="postImage" :alt="postImageAlt" />
+        <div class="row">
+          <div class="col-12">
+            <h1 class="postview__title">{{ post.title.rendered }}</h1>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 col-md-3">
+            <div class="postview__info">
+              <div class="postview__info--item">
+                <strong>Date</strong>
+                {{ post.date | truncate(10, '') }}
+              </div>
+              <div class="postview__info--item">
+                <strong>Author</strong>
+                pospisk
+                <!-- {{post.author_name}} -->
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-9 postview__body" v-html="post.content.rendered"></div>
+        </div>
+        
       </template>
       <Loader v-else />
     </div>
@@ -113,6 +115,13 @@ export default {
       }
     },
   },
+  created(){
+
+    var meta_robots = document.createElement('meta');
+    meta_robots.setAttribute('name', 'robots');
+    meta_robots.setAttribute('content', 'index');
+    document.getElementsByTagName('head')[0].appendChild(meta_robots);
+  },
   methods: {
     getPost: function (postslug) {
 
@@ -123,12 +132,16 @@ export default {
         .then((response) => {
           this.post = response.data[0];
           this.getFeaturedImage(this.post);
-          console.log('get post: ');
-          console.log(response.data[0].id);
           this.postId = response.data[0].id;
+          var sanitizedExcerpt = this.post.excerpt.rendered.replace(/(<([^>]+)>)/gi, "");
+          window.document.title = this.post.title.rendered + " - pospisk";
 
-          console.log("after get post axios")
-          console.log(this.post);
+          var meta_desc = document.createElement('meta');
+          meta_desc.setAttribute('name', 'description');
+          meta_desc.setAttribute('content', sanitizedExcerpt);
+          document.getElementsByTagName('head')[0].appendChild(meta_desc);
+
+
           this.post.author_avatar = {};
           this.post.author_name = {};
           this.post.author_url = {};
@@ -140,27 +153,19 @@ export default {
               .then((response) => {
                 if (response.data.simple_local_avatar) {
                   this.post.author_avatar = response.data.simple_local_avatar["96"]; // uses https://10up.com/plugins/simple-local-avatars-wordpress/
-                  console.log(this.post.author_avatar);
-                  
                 } else {
                   this.post.author_avatar = response.data.avatar_urls["96"];
-                  console.log(this.post.author_avatar);
-                  
                 }
-
-                console.log("response")
-                console.log(response);
-
                 this.post.author_name = response.data.name;
                 this.post.author_url = response.data.link;
+
               })
               .catch((e) => {
                 console.log(e);
               });
           };
           axiosAuthor();
-          console.log("ende axios")
-          console.log(this.post);
+
 
         })
         .catch((e) => {
@@ -200,7 +205,7 @@ export default {
         axios
           .get(SETTINGS.API_BASE_PATH + "media/" + post.featured_media)
           .then((response) => {
-            this.postImage = response.data.guid.rendered;
+            this.postImage = response.data.source_url;
             this.postImageAlt = response.data.alt_text;
           })
           .catch((e) => {

@@ -10,13 +10,19 @@
     <link rel="manifest" href="/wp-content/themes/pospisk/src/public/manifest.json">
     <?php wp_head(); ?>
     <title>pospisk</title>
+    <meta property="og:title" content="Kristián Pospiš - pospisk">
+    <meta property="og:site_name" content="pospisk">
+    <meta property="og:url" content="https://pospi.sk/">
+    <meta property="og:description" content="Kristian Pospis, professional front-end developer and designer with a passion for interactive content. Based in Denmark and Germany.">
+    <meta property="og:type" content="profile">
+    <meta property="og:image" content="https://pospi.sk/wp-content/themes/pospisk/og_pospisk.jpg">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org/",
         "@type": "Person",
         "name": "Kristián Pospiš",
         "url": "https://pospi.sk",
-        "image": "/wp-content/themes/pospisk/src/public/manifest.json",
+        "image": "https://pospi.sk/wp-content/themes/pospisk/dist/img/kristian_pospis.png",
         "sameAs": [
           "https://instagram.com/pospisk",
           "https://www.linkedin.com/in/kristian-pospi%C5%A1-39643899/",
