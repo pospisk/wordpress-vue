@@ -29,6 +29,65 @@ add_action( 'wp_enqueue_scripts', 'load_vue_scripts', 100 );
 
 add_theme_support( 'post-thumbnails' );
 
+add_filter( 'kdmfi_featured_images', function( $featured_images ) {
+	$args_0 = array(
+		'id' => 'featured-image-2',
+		'desc' => 'Your description here.',
+		'label_name' => 'Featured Image 2',
+		'label_set' => 'Set featured image 2',
+		'label_remove' => 'Remove featured image 2',
+		'label_use' => 'Set featured image 2',
+		'post_type' => array('post'),
+		'order' => 0,
+	);
+	$args_1 = array(
+		'id' => 'featured-image-3',
+		'desc' => 'Your description here.',
+		'label_name' => 'Featured Image 3',
+		'label_set' => 'Set featured image 3',
+		'label_remove' => 'Remove featured image 3',
+		'label_use' => 'Set featured image 3',
+		'post_type' => array('post'),
+		'order' => 1,
+	);
+
+	$featured_images[] = $args_0;
+	$featured_images[] = $args_1;
+
+	return $featured_images;
+});
+
+function featured_image_rest_api(){
+	register_rest_field('post', 'featured_media_secondary_url', array(
+		'get_callback' => function(){
+			return kdmfi_get_featured_image_src( 'featured-image-2', 'full' );
+		}
+	));
+	register_rest_field('post', 'featured_media_secondary_alt', array(
+		'get_callback' => function(){
+			
+			$featured_image_2_alt = kdmfi_get_featured_image( 'featured-image-2', 'full');
+			preg_match('/<img.*?alt="(.*?)".*>/',$featured_image_2_alt,$match);
+			return $match[1];
+		}
+	));
+	register_rest_field('post', 'featured_media_third_url', array(
+		'get_callback' => function(){
+			return kdmfi_get_featured_image_src( 'featured-image-3', 'full' );
+		}
+	));
+	register_rest_field('post', 'featured_media_third_alt', array(
+		'get_callback' => function(){
+			
+			$featured_image_3_alt = kdmfi_get_featured_image( 'featured-image-3', 'full');
+			preg_match('/<img.*?alt="(.*?)".*>/',$featured_image_3_alt,$match);
+			return $match[1];
+		}
+	));
+}
+
+add_action( 'rest_api_init', 'featured_image_rest_api');
+
 // Register Custom Post Type
 function timeline_post_type() {
 
@@ -117,3 +176,4 @@ function admin_style() {
 	EOD;
 }
 add_action('admin_enqueue_scripts', 'admin_style');
+

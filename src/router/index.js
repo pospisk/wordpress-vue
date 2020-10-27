@@ -58,6 +58,25 @@ const router = new Router({
   },
 });
 
+function getRoutesList(routes, pre) {
+  return routes.reduce((array, route) => {
+    const path = `${pre}${route.path}`;
+
+    if (route.path !== '*') {
+      array.push(path);
+    }
+
+    if (route.children) {
+      array.push(...getRoutesList(route.children, `${path}/`));
+    }
+
+    return array;
+  }, []);
+}
+console.log(
+  getRoutesList(router.options.routes, 'https://pospisk.local')
+);
+
 router.beforeEach((to, from, next) => {
   let body = document.querySelector("body");
   const classBase = "vue--page--";

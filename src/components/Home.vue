@@ -29,14 +29,17 @@
               Odense, Denmark. Previously I have studied <strong>Multimedia Design and
               Communication (AP)</strong> at EAL (former UCL, 2015) in Odense.
             </p>
-            <a class="btn btn-primary" :href="kpcvpdf" download>Download CV</a>
+            <div class="d-flex flex-row justify-content-center justify-content-lg-start">
+                <a class="btn btn-primary btn-cv" :href="kpcvpdfen" download>CV EN🇬🇧</a>
+                <a class="btn btn-primary btn-cv" :href="kpcvpdfde" download>CV DE🇩🇪</a>
+            </div>
           </div>
         </div>
         <span class="scroll--down"></span>
       </div>
       <div id="tlPosts" class="row min-vh-80 align-items-center maxw-lg">
           <div class="col-12 my-5">
-            <recent-posts-widget limit="3">Latest Work</recent-posts-widget>
+            <recent-posts-widget limit="4" class="home-posts">Latest Work</recent-posts-widget>
           </div>
       </div>
       <div id="tlSkills" class="row min-vh-80 align-items-center maxw-lg">
@@ -144,7 +147,8 @@
 import RecentPostsWidget from "./widgets/RecentPosts.vue";
 import PagesWidget from "./widgets/Pages.vue";
 
-import kpcvpdf from "../public/kp-cv.pdf";
+import kpcvpdfen from "../public/kp_cv-en.pdf";
+import kpcvpdfde from "../public/kp_cv-de.pdf";
 
 import gsap from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
@@ -165,7 +169,8 @@ export default {
   data() {
     return {
       animationStatus: false,
-      kpcvpdf: kpcvpdf,
+      kpcvpdfen: kpcvpdfen,
+      kpcvpdfde: kpcvpdfde,
       menu: false,
       logoPlayed: false,
       tlintro: gsap.timeline(),

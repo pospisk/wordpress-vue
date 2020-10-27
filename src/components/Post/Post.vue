@@ -2,46 +2,6 @@
   <div class="row mb-5">
     <div class="col-12 postview maxw-lg">
       <template v-if="post">
-        <img class="img-fluid postview__header" :src="postImage" :alt="postImageAlt" />
-        <ul class="arrow__links">
-          <li v-if="prevPost.slug == 'null'" class="arrow__link">
-            <router-link to="/null" tag="a" class="arrow__href disabled">
-              <svg class="arrow__icon" viewBox="0 0 47.5 24">
-                <polygon points="32.1,19.4 24.4,12 31.8,4.6 31,3.8 23.7,11.3 16.3,3.8 15.5,4.6 23,12 15.5,19.4 16.3,20.2 23.7,12.7 31.4,20.2 "/>
-              </svg>
-            </router-link>
-          </li>
-          <li v-else class="arrow__link">
-            <router-link :to="'/posts/' + prevPost.slug + '/'" tag="a" class="arrow__href" replace>
-              <svg class="arrow__icon" viewBox="0 0 47.5 24">
-                <polygon points="35.8,3.8 35,4.6 42,11.5 4.3,11.5 4.3,12.5 42,12.5 35,19.4 35.8,20.2 43.9,12 "/>
-              </svg>
-
-              <span class="arrow__title">
-                <i class="sr-only">Previous article: </i>{{prevPost.title.rendered}}
-              </span>
-            </router-link>
-          </li>
-
-          <li v-if="nextPost.slug == 'null'" class="arrow__link">
-            <router-link to="/null" tag="a" class="arrow__href disabled">
-              <svg class="arrow__icon" viewBox="0 0 47.5 24">
-                <polygon points="32.1,19.4 24.4,12 31.8,4.6 31,3.8 23.7,11.3 16.3,3.8 15.5,4.6 23,12 15.5,19.4 16.3,20.2 23.7,12.7 31.4,20.2 "/>
-              </svg>
-            </router-link>
-          </li>
-          <li v-else class="arrow__link">
-            <router-link :to="'/posts/' + nextPost.slug + '/'" tag="a" class="arrow__href"> 
-              <span class="arrow__title">
-                <i class="sr-only">Next article: </i>{{nextPost.title.rendered}}
-              </span>
-
-              <svg class="arrow__icon" viewBox="0 0 47.5 24">
-                <polygon points="35.8,3.8 35,4.6 42,11.5 4.3,11.5 4.3,12.5 42,12.5 35,19.4 35.8,20.2 43.9,12 "/>
-              </svg>
-            </router-link>
-          </li>
-        </ul>
         <div class="row">
           <div class="col-12">
             <h1 class="postview__title">{{ post.title.rendered }}</h1>
@@ -63,7 +23,65 @@
           </div>
           <div class="col-12 col-md-9 postview__body" v-html="post.content.rendered"></div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <ul class="arrow__links">
+              <li v-if="prevPost.slug == 'null'" class="arrow__link">
+                <router-link to="/null" tag="a" class="arrow__href disabled">
+                  <svg class="arrow__icon" viewBox="0 0 47.5 24">
+                    <polygon points="32.1,19.4 24.4,12 31.8,4.6 31,3.8 23.7,11.3 16.3,3.8 15.5,4.6 23,12 15.5,19.4 16.3,20.2 23.7,12.7 31.4,20.2 "/>
+                  </svg>
+                </router-link>
+              </li>
+              <li v-else class="arrow__link">
+                <router-link :to="'/posts/' + prevPost.slug + '/'" tag="a" class="arrow__href" replace>
+                  <svg class="arrow__icon" viewBox="0 0 47.5 24">
+                    <polygon points="35.8,3.8 35,4.6 42,11.5 4.3,11.5 4.3,12.5 42,12.5 35,19.4 35.8,20.2 43.9,12 "/>
+                  </svg>
+
+                  <span class="arrow__title">
+                    <i class="sr-only">Previous article: </i>{{prevPost.title.rendered}}
+                  </span>
+                </router-link>
+              </li>
+
+              <li v-if="nextPost.slug == 'null'" class="arrow__link">
+                <router-link to="/null" tag="a" class="arrow__href disabled">
+                  <svg class="arrow__icon" viewBox="0 0 47.5 24">
+                    <polygon points="32.1,19.4 24.4,12 31.8,4.6 31,3.8 23.7,11.3 16.3,3.8 15.5,4.6 23,12 15.5,19.4 16.3,20.2 23.7,12.7 31.4,20.2 "/>
+                  </svg>
+                </router-link>
+              </li>
+              <li v-else class="arrow__link">
+                <router-link :to="'/posts/' + nextPost.slug + '/'" tag="a" class="arrow__href"> 
+                  <span class="arrow__title">
+                    <i class="sr-only">Next article: </i>{{nextPost.title.rendered}}
+                  </span>
+
+                  <svg class="arrow__icon" viewBox="0 0 47.5 24">
+                    <polygon points="35.8,3.8 35,4.6 42,11.5 4.3,11.5 4.3,12.5 42,12.5 35,19.4 35.8,20.2 43.9,12 "/>
+                  </svg>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
         
+        <div class="row" v-if="postImage_2">
+          <div class="col-12 text-center">
+            <img class="img-fluid postview__header" :src="postImage_2" :alt="postImage_2_Alt" />
+          </div>
+        </div>
+        <div class="row" v-if="postImage_3">
+          <div class="col-12 text-center">
+            <img class="img-fluid postview__header" :src="postImage_3" :alt="postImage_3_Alt" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <img class="img-fluid postview__header" :src="postImage" :alt="postImageAlt" />
+          </div>
+        </div>
       </template>
       <Loader v-else />
     </div>
@@ -96,6 +114,8 @@ export default {
         }
       },
       postImage: [],
+      postImage_2: [],
+      postImage_2_Alt: [],
       postImageAlt: [],
     };
   },
@@ -130,6 +150,10 @@ export default {
           SETTINGS.API_BASE_PATH + "posts?slug=" + this.$route.params.postSlug
         )
         .then((response) => {
+          console.log("response.data");
+          console.log(response.data);
+          this.postImage_2 = response.data[0].featured_media_secondary_url;
+          this.postImage_2_Alt = response.data[0].featured_media_secondary_alt;
           this.post = response.data[0];
           this.getFeaturedImage(this.post);
           this.postId = response.data[0].id;

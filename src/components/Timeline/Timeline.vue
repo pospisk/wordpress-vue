@@ -17,11 +17,14 @@
                     <p>
                         I’m a perfectionist who focuses on front-end development with a passion for creating interactive content and UI. I am 24 years old with 13 years of experience in Photoshop and 8 years of experience in Illustrator. 
                     </p>
-                    <a class="btn btn-primary" :href="kpcvpdf" download>Download CV</a>
+                    <div class="d-flex flex-row justify-content-center justify-content-lg-start">
+                        <a class="btn btn-primary btn-cv" :href="kpcvpdfen" download>CV EN🇬🇧</a>
+                        <a class="btn btn-primary btn-cv" :href="kpcvpdfde" download>CV DE🇩🇪</a>
+                    </div>
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="col-12">
+                <div class="col-12 p-0">
                     <timeline-items></timeline-items>
                 </div>
             </div>
@@ -36,7 +39,8 @@ import Loader from "../partials/Loader.vue";
 import TimelineItems from "../widgets/TimelineItems.vue";
 import SETTINGS from "../../settings";
 
-import kpcvpdf from "../../public/kp-cv.pdf";
+import kpcvpdfen from "../../public/kp_cv-en.pdf";
+import kpcvpdfde from "../../public/kp_cv-de.pdf";
 
 import gsap from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
@@ -52,7 +56,8 @@ export default {
     data() {
         return {
             timeline: false,
-            kpcvpdf: kpcvpdf,
+            kpcvpdfen: kpcvpdfen,
+            kpcvpdfde: kpcvpdfde,
             tlAbout: gsap.timeline(),
         };
     },

@@ -19,6 +19,35 @@ body {
   }
 }
 
+.btn-cv{
+  max-width: 160px;
+  margin-right: .5em;
+  .emoji{
+    margin-right: 0 !important;
+  }
+}
+
+.b-dropdown.btn-group{
+  max-width: 150px;
+  button{
+    background-color: unset !important;
+    background: unset !important;
+    color: $primary-color !important;
+    box-shadow: unset;
+    border: 1px solid $primary-color;
+  }
+  ul{
+    padding: 8px;
+  }
+  li{
+    margin-bottom: 4px;
+    padding: 0;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
 .content {
   &-wrapper {
     margin: 100px 64px 0 64px;
@@ -123,11 +152,13 @@ body {
       max-width: 600px;
     }
     .btn{
-      display: inline;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @media (min-width: 992px){
-        display: flex;
-        flex-direction: row;
-        align-self: flex-start;
+        // display: flex;
+        // flex-direction: row;
+        // align-self: flex-start;
       }
     }
     h1 {

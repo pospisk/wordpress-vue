@@ -3,16 +3,19 @@
 	margin: 2em auto 0;
 	min-height: 100%;
 	max-width: 1200px;
-	padding: 4em 2em;
+	padding: 4em 1em;
 	display: flex;
 	flex-direction: column;
-		
+	transform: translateX(-1em);
+	@media (min-width:992px){
+		transform: translateX(0);
+	}
 	&::before{
 		content: '';
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		left: 3em;
+		left: 2em;
 		height: 100%;
 		width: 1px;
 		background-color: lighten( #000000, 50%);
@@ -189,7 +192,14 @@
 		}
 		
 		&--title{
-			
+			h3{
+				word-wrap: break-word;
+				overflow-wrap: break-word;
+			  
+			  -webkit-hyphens: auto;
+				 -moz-hyphens: auto;
+					  hyphens: auto;
+			}
 		}
 		&--content{
 			
