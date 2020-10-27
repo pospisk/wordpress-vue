@@ -120,11 +120,13 @@ export default {
     };
   },
 
-  computed: {},
+  mounted() {
+    this.getPosts();
+  },
 
   beforeMount() {
     this.getPost();
-    this.getPosts();
+    // this.getPosts();
   },
   filters: {
     truncate: function (text, length, suffix) {
